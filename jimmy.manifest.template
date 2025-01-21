@@ -1,0 +1,93 @@
+# Rust manifest example
+
+libos.entrypoint = "{{ self_exe }}"
+
+loader.log_level = "{{ log_level }}"
+
+loader.env.LD_LIBRARY_PATH = "/lib:{{ arch_libdir }}"
+
+# See https://gramine.readthedocs.io/en/latest/devel/performance.html#glibc-malloc-tuning
+loader.env.MALLOC_ARENA_MAX = "1"
+
+# For easier debugging — not strictly required to run this workload
+loader.env.RUST_BACKTRACE = "full"
+
+fs.mounts = [
+  { path = "/lib", uri = "file:{{ gramine.runtimedir() }}" },
+  { path = "{{ arch_libdir }}", uri = "file:{{ arch_libdir }}" },
+  { path = "/etc/ssl/certs", uri = "file:ca-certificates.crt" },
+  { path = "/store", uri = "file:store" },
+  # { type = "encrypted", path = "/store", uri = "file:store", key_name = "_sgx_mrsigner" },
+]
+
+sgx.allowed_files = [
+  "file:store/",
+]
+
+sys.enable_extra_runtime_domain_names_conf = true
+sys.fds.limit = 65535
+
+sgx.debug = false
+sgx.edmm_enable = false
+sgx.enclave_size = "8G"
+sgx.remote_attestation = "dcap"
+
+sgx.trusted_files = [
+  "file:{{ gramine.libos }}",
+  "file:{{ self_exe }}",
+  "file:{{ gramine.runtimedir() }}/",
+  "file:{{ arch_libdir }}/",
+  "file:assets/",
+  "file:ca-certificates.crt",
+]
+
+# The maximum number of threads in a single process needs to be declared in advance.
+# You need to account for:
+# - one main thread
+# - any threads and threadpools you might be starting
+# - helper threads internal to Gramine — see:
+#   https://gramine.readthedocs.io/en/latest/manifest-syntax.html#number-of-threads
+sgx.max_threads = 128
+
+
+loader.env.SGX = "1"
+
+loader.env.RUST_LOG = "info"
+
+loader.env.SOLANA_RPC_URL = { passthrough = true }
+loader.env.TOKEN_NAME = { passthrough = true }
+loader.env.TOKEN_SYMBOL = { passthrough = true }
+loader.env.TOKEN_URI = { passthrough = true }
+loader.env.TOKEN_DECIMALS = { passthrough = true }
+loader.env.TOTAL_SUPPLY = { passthrough = true }
+
+loader.env.RAYDIUM_POOL_PRICE = { passthrough = true }
+loader.env.RAYDIUM_POOL_MIN_PRICE = { passthrough = true }
+loader.env.RAYDIUM_POOL_MAX_PRICE = { passthrough = true }
+loader.env.RAYDIUM_POOL_DEPOSIT = { passthrough = true }
+
+loader.env.AZURE_OPENAI_API_KEY = { passthrough = true }
+loader.env.AZURE_OPENAI_ENDPOINT = { passthrough = true }
+loader.env.AZURE_OPENAI_API_VERSION = { passthrough = true }
+loader.env.AZURE_OPENAI_CHAT_MODEL = { passthrough = true }
+
+loader.env.COINGECKO_API_KEY = { passthrough = true }
+
+loader.env.COINMARKETCAP_API_KEY = { passthrough = true }
+
+loader.env.JUPITER_RPC_URL = { passthrough = true }
+
+loader.env.USE_TWITTER = { passthrough = true }
+loader.env.TWITTER_CONSUMER_KEY = { passthrough = true }
+loader.env.TWITTER_CONSUMER_KEY_SECRET = { passthrough = true }
+loader.env.TWITTER_ACCESS_TOKEN = { passthrough = true }
+loader.env.TWITTER_ACCESS_TOKEN_SECRET = { passthrough = true }
+
+loader.env.SUBSTACK_SUBSCRIPTION_URLS = { passthrough = true }
+
+loader.env.MOCK_TRADE = { passthrough = true }
+loader.env.SELL_JIMMY_AMOUNT = { passthrough = true }
+loader.env.MAX_SOL_TRADING_AMOUNT_ONE_DAY = { passthrough = true }
+loader.env.MIN_PROFIT_RATE = { passthrough = true }
+
+loader.env.STORE_PATH = "store"
