@@ -1,5 +1,4 @@
 use anyhow::Result;
-use serde_json::Value;
 use solana_account_decoder::{parse_token::UiTokenAmount, UiAccountData};
 use solana_client::{
     rpc_config::RpcSendTransactionConfig, rpc_request::TokenAccountsFilter,

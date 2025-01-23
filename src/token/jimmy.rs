@@ -1,13 +1,11 @@
 use anyhow::Result;
 use mpl_token_metadata::instructions as mpl_instruction;
-use mpl_token_metadata::{accounts::Metadata, types::DataV2};
+use mpl_token_metadata::types::DataV2;
 use serde::{Deserialize, Serialize};
-use solana_client::rpc_config::{
-    RpcAccountInfoConfig, RpcProgramAccountsConfig, RpcSendTransactionConfig,
-};
+use solana_client::rpc_config::RpcSendTransactionConfig;
 use solana_sdk::{
     commitment_config::CommitmentConfig,
-    compute_budget::{self, ComputeBudgetInstruction},
+    compute_budget::ComputeBudgetInstruction,
     instruction::Instruction,
     program_pack::Pack,
     pubkey::Pubkey,
@@ -19,10 +17,7 @@ use spl_associated_token_account::instruction as ata_instruction;
 use spl_token::state::Mint;
 use tokio::sync::OnceCell;
 
-use std::iter::Once;
-use std::sync::OnceLock;
-
-use super::raydium::{create_position, create_raydium_clmm_pool, fetch_pool, increase_liquidity};
+use super::raydium::{create_position, create_raydium_clmm_pool};
 use crate::client::get_finalized_client;
 use crate::config::Config;
 use crate::constant::*;

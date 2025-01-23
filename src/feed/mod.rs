@@ -5,8 +5,6 @@ use anyhow::Result;
 use async_trait::async_trait;
 use serde::{Deserialize, Serialize};
 
-pub use newsletter::NewsletterFeed;
-
 #[async_trait]
 pub trait Feed {
     async fn fetch(&self) -> Result<Option<String>>;

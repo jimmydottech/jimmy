@@ -8,7 +8,7 @@ pub mod rocksdb;
 pub use map::StoreMap;
 use serde::{de::DeserializeOwned, Serialize};
 
-/// TODO(ethan): define error
+/// TODO: define error
 /// The Store is for storing some data in embedded storage.
 pub trait Store {
     type Iter<'a>: Iterator<Item = (Box<[u8]>, Box<[u8]>)>;

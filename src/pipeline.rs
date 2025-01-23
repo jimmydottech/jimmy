@@ -12,7 +12,6 @@ use crate::constant::*;
 use crate::feed::{Feed, FeedType};
 use crate::llm::azure::run_prompt;
 use crate::llm::scorer::score_reply;
-use crate::llm::voice_reference::VoiceReference;
 use crate::portfolio::Portfolio;
 use crate::price::coingecko::CoinGeckoProvider;
 use crate::strategy::select_tokens;

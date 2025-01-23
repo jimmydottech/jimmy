@@ -1,16 +1,12 @@
 use anyhow::Result;
-use rocksdb::DBPath;
 use serde::{Deserialize, Serialize};
 use tweety_rs::api::mentions::{
-    ExpansionType, MentionsResponse, QueryParams as MentionsQueryParams, ReferencedTweet,
-    TweetField, UserField,
+    ExpansionType, QueryParams as MentionsQueryParams, ReferencedTweet, TweetField, UserField,
 };
-use tweety_rs::api::tweet::{LookupResponse, QueryParams as TweetQueryParams};
-use tweety_rs::api::user::UserQueryParams;
+use tweety_rs::api::tweet::QueryParams as TweetQueryParams;
 use tweety_rs::types::tweet::{PostTweetParams, Reply as ReplyParams};
 use tweety_rs::TweetyClient;
 
-use std::collections::HashMap;
 use std::sync::OnceLock;
 
 use crate::config::Config;

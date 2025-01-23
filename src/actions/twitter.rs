@@ -9,7 +9,7 @@ pub enum TwitterAction {
     InvestorMemo {
         tweet_id: String,
         tweet_text: String,
-    }, // TODO(ethan): Add more Twitter actions
+    },
 }
 
 impl ToString for TwitterAction {

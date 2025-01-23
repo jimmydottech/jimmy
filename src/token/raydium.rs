@@ -2,11 +2,7 @@ use anyhow::Result;
 use clmm_cli::ClmmCommands;
 use common::CommonConfig;
 use common::{common_types, rpc};
-use solana_client::{
-    rpc_client::RpcClient,
-    rpc_config::RpcSendTransactionConfig,
-    rpc_filter::{Memcmp, RpcFilterType},
-};
+use solana_client::rpc_config::RpcSendTransactionConfig;
 use solana_sdk::commitment_config::CommitmentConfig;
 use solana_sdk::compute_budget::ComputeBudgetInstruction;
 use solana_sdk::pubkey::Pubkey;
@@ -16,7 +12,6 @@ use std::str::FromStr;
 use std::sync::Arc;
 
 use crate::client::get_finalized_client;
-use crate::config::Config;
 use crate::constant::*;
 use crate::token::jimmy::JimmyToken;
 use crate::wallet::Wallet;
