@@ -29,3 +29,5 @@ metadata.so
 .env
 
 /store
+
+update_dev_log.sh
